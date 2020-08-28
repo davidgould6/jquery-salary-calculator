@@ -1,6 +1,6 @@
 ---- Create an application that records employee salaries and adds salaries up to report monthly costs. -----
 
-[ ] inputs for employee first name, employee last name, ID number, job title, annual salary
+[x] inputs for employee first name, employee last name, ID number, job title, annual salary
 
 [ ] create submit button
 [ ] when button clicked collect all info ~~~ store information in array?
