@@ -1,11 +1,13 @@
 $(document).ready(onReady);
 let inputInfo = [];
+let delButton;
+// found rounding number to closest hundredth from https://stackoverflow.com/questions/14968615/rounding-to-the-nearest-hundredth-of-a-decimal-in-javascript
+const roundToHundredth = (value) => {
+    return Number(value.toFixed(2));
+}
 
 function deleteStuff(){
-    console.log('hello, this is the delete button');
     $(this).closest("tr").remove();
-    console.log(`totalCosts is ${totalCosts} `);
-    //use .text()
 }
 
 function emptyFields(){
@@ -43,6 +45,7 @@ function loadStuff(){
     <th class="borderStyle">Title</th>
     <th class="borderStyle">Annual Salary</th>`
     );
+
 }
 
 function onReady(){
@@ -55,19 +58,21 @@ function onReady(){
 function salaryAdder(){
     let totalCosts = 0;
     for( let i = 0; i < inputInfo.length; i++){
-        let numberOfAnnual = inputInfo[i].annualSalary
-        totalCosts += Number(numberOfAnnual); 
-    }
-    let el = $('.displayMonthlyCost');
-    el.empty();
-    el.text('Monthly costs are: $' + totalCosts );
-    if(totalCosts > 20000){
-        $('.displayMonthlyCost').attr('id', 'overBudget');
+            console.log('in salaryAdder first if...');
+            let numberOfAnnual = inputInfo[i].annualSalary
+            let monthlyPay = Number(numberOfAnnual)
+            let dividedByTwelve = monthlyPay/12
+            totalCosts += dividedByTwelve; 
+            let el = $('.displayMonthlyCost');
+            el.empty();
+            el.text('Monthly costs are: $' + roundToHundredth(totalCosts) );  // can use math round but will round number value to nearest integer. 
+            if(totalCosts > 20000){
+                $('.displayMonthlyCost').attr('id', 'overBudget');
+            }
     }
 }
 
 function submitInfo(){
-    //console.log('handshake and stuff.');
     let employeeObj = {
        firstName: $('#firstName').val(),
        lastName: $('#lastName').val(),
@@ -91,3 +96,6 @@ function submitInfo(){
     <td><button id="deleteButton">Delete</button><td></tr>`);
     salaryAdder();
 }
+
+// whenever delete button is pressed I need the boolean to be set to true
+// whenever submit button is pressed I need the boolean to be set to false.
