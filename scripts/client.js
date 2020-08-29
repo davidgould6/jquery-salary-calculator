@@ -1,6 +1,6 @@
 $(document).ready(onReady);
 let inputInfo = [];
-let delButton = false;
+//let delButton = false;
 // found rounding number to closest hundredth from https://stackoverflow.com/questions/14968615/rounding-to-the-nearest-hundredth-of-a-decimal-in-javascript
 const roundToHundredth = (value) => {
     return Number(value.toFixed(2));
@@ -9,17 +9,6 @@ const roundToHundredth = (value) => {
 function deleteStuff(){
     console.log('in delete stuff')
     $(this).closest("tr").remove();
-
-    console.log('delButton is at line 13', delButton);
-}
-function delButtonTrue(){
-    let delButton = true;
-    salaryAdder();
-    console.log('delButtonTrue', delButton);
-}
-function delButtonFalse(){
-    let delButton = false;
-    console.log('delButtonFalse', delButton);
 }
 
 function emptyFields(){
@@ -61,28 +50,20 @@ function loadStuff(){
 
 function onReady(){
     loadStuff();
-    $(document).on('mousedown', '#submitButton', delButtonFalse);
-    $(document).on('mouseup', '#submitButton', emptyFields);
-    $(document).on('mousedown','#deleteButton', delButtonTrue);
-    $(document).on('mouseup','#deleteButton', deleteStuff);
+    $(document).on('click', '#submitButton', emptyFields);
+    $(document).on('click','#deleteButton', deleteStuff);
 }
 
 function salaryAdder(){
     let totalCosts = 0;
-    for( let i = 0; i < inputInfo.length; i++){
-        if( delButton === false){
-            console.log('delButton is false', delButton);
-            let numberOfAnnual = inputInfo[i].annualSalary
-            let monthlyPay = Number(numberOfAnnual)
-            let dividedByTwelve = monthlyPay/12
-            totalCosts += dividedByTwelve; 
-            let el = $('.displayMonthlyCost');
-            el.empty();
-            el.text('Monthly costs are: $' + roundToHundredth(totalCosts) );
-        }
-        else if( delButton === true){
-            console.log(`you've gotten into else if delButton === true`);
-        }
+    for(let i = 0; i < inputInfo.length; i++){
+        let numberOfAnnual = inputInfo[i].annualSalary
+        let monthlyPay = Number(numberOfAnnual)
+        let dividedByTwelve = monthlyPay/12
+        totalCosts += dividedByTwelve; 
+        let el = $('.displayMonthlyCost');
+        el.empty();
+        el.text('Monthly costs are: $' + roundToHundredth(totalCosts) );
     }
 }
 
@@ -120,5 +101,17 @@ function submitInfo(){
 // whenever submit button is pressed I need the boolean to be set to false.
 
 /*
-I'm running into a scope issue that doesn't get me into the conditional...
+I'm running into a scope issue that doesn't get me into the conditional... for the stretch goal since my total is declared inside a function...
+I was trying to use mouse down and mouse up to change the delButton to either true or false but after release it just defaulted back to 
+the global...
 */
+
+/*function delButtonTrue(){
+    let delButton = true;
+    salaryAdder();
+    console.log('delButtonTrue', delButton);
+}
+function delButtonFalse(){
+    let delButton = false;
+    console.log('delButtonFalse', delButton);
+}*/
