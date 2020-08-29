@@ -2,10 +2,12 @@
 
 [x] inputs for employee first name, employee last name, ID number, job title, annual salary
 
-[ ] create submit button
-[ ] when button clicked collect all info ~~~ store information in array?
-[ ] append information to the dom
-[ ] clear input fields
+[x] create submit button
+[x] capture / create click event
+[x] create an empty array to store info in as object.
+[x] when button clicked collect all info
+[x] append information to the dom
+[x] clear input fields
 [ ] using stored information --- calculate monthly costs
 [ ] append monthly costs to DOM
 [ ] if total costs $20,000 > add red background to the total monthly cost

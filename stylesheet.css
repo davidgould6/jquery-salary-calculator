@@ -1,0 +1,7 @@
+td {
+    text-align: center;
+}
+.displayMonthlyCost {
+    position: absolute;
+    right: 100px;
+}
