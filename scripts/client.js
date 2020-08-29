@@ -1,20 +1,5 @@
 $(document).ready(onReady);
-let inputInfo = [/*{
-    firstName: 'David',
-    lastName: 'Gould',
-    idNumber: 12,
-    jobTitle: 'Student',
-    annualSalary: 19996
-},
-{
-    firstName: 'Yoda',
-    lastName: 'None',
-    idNumber: 1,
-    jobTitle: 'Master Jedi',
-    annualSalary: 3
-}*/
-];
-
+let inputInfo = [];
 
 function emptyFields(){
     if(document.getElementById( 'firstName' ).value === ""){
@@ -57,6 +42,7 @@ function onReady(){
     $(document).on('click','#submitButton', emptyFields);
     $(document).on('click', '#deleteButton', deleteStuff);
 }
+
 function salaryAdder(){
     let totalCosts = 0;
     for( let i = 0; i < inputInfo.length; i++){
@@ -86,18 +72,20 @@ function submitInfo(){
     $('#jobTitle').val('');
     $('#annualSalary').val('');
 
-    $('#actualTable').append(`<tr class="class">
-    <td class="borderStyle" class="firstItem">${employeeObj.firstName}</td>
-    <td class="borderStyle" class="secondItem">${employeeObj.lastName}</td>
+    $('#actualTable').append(`<tr>
+    <td class="borderStyle">${employeeObj.firstName}</td>
+    <td class="borderStyle">${employeeObj.lastName}</td>
     <td class="borderStyle">${employeeObj.idNumber}</td>
     <td class="borderStyle">${employeeObj.jobTitle}</td>
     <td class="borderStyle">$${employeeObj.annualSalary}</td>
-    <td>qwe qwe<button id="deleteButton">Delete</button><td></tr>`);
+    <td><button id="deleteButton">Delete</button><td></tr>`);
     salaryAdder();
 }
 
 function deleteStuff(){
     console.log('hello, this is the delete button');
     $(this).closest("tr").remove();
+    console.log(`totalCosts is ${totalCosts} `);
+    //use .text()
 }
 // added a function to not allow submit if any field is empty...
