@@ -1,8 +1,12 @@
 body{
     background-color: #f9ffe0;
 }
-td {
+.borderStyle {
     text-align: center;
+    border: 1px solid black;
+}
+table{
+    border-collapse: collapse;
 }
 .displayMonthlyCost {
     position: absolute;
@@ -19,8 +23,4 @@ td {
     position:absolute;
     right:100px;
     background-color: red;
-}
-.borderStyle{
-    border: 1px solid black;
-    border-collapse: collapse;
 }
