@@ -5,8 +5,19 @@ td {
     position: absolute;
     right: 100px;
 }
+.allInputItems{
+    text-align: center;
+    display: inline-block;
+}
+.tableFormat{
+    text-align: center;
+}
 #overBudget{
     position:absolute;
     right:100px;
     background-color: red;
+}
+.borderStyle{
+    border: 1px solid black;
+    border-collapse: collapse;
 }

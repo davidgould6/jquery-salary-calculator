@@ -37,18 +37,18 @@ function emptyFields(){
     }
 }
 function loadStuff(){
-    $('.userInputs').append(`<input type="text" id="firstName" placeholder="First Name">`);
-    $('.userInputs').append(`<input type="text" id="lastName" placeholder="Last Name">`);
-    $('.userInputs').append(`<input type="number" id="employeeNumber" placeholder="Employee ID Number">`);
-    $('.userInputs').append(`<input type="text" id="jobTitle" placeholder="Job Title">`);
-    $('.userInputs').append(`<input type="number" id="annualSalary" placeholder="Annual Salary">`);
-    $('.userInputs').append(`<button id="submitButton">Submit</button>`);
+    $('#inputTable').append(`<th><input type="text" class="allInputItems" id="firstName" placeholder="First Name"></th>`);
+    $('#inputTable').append(`<th><input type="text" class="allInputItems" id="lastName" placeholder="Last Name"></th>`);
+    $('#inputTable').append(`<th><input type="number" class="allInputItems" id="employeeNumber" placeholder="Employee ID Number"></th>`);
+    $('#inputTable').append(`<th><input type="text" class="allInputItems" id="jobTitle" placeholder="Job Title"></th>`);
+    $('#inputTable').append(`<th><input type="number" class="allInputItems" id="annualSalary" placeholder="Annual Salary"></th>`);
+    $('#inputTable').append(`<th><button class="allInputItems" id="submitButton">Submit</button></th>`);
     $('#headOfTable').append(`
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Annual Salary</th>`
+    <th class="borderStyle">First Name</th>
+    <th class="borderStyle">Last Name</th>
+    <th class="borderStyle">ID</th>
+    <th class="borderStyle">Title</th>
+    <th class="borderStyle">Annual Salary</th>`
     );
 }
 function onReady(){
@@ -86,18 +86,18 @@ function submitInfo(){
     $('#jobTitle').val('');
     $('#annualSalary').val('');
 
-    $('#actualTable').append(`<tr>
-    <td>${employeeObj.firstName}</td>
-    <td>${employeeObj.lastName}</td>
-    <td>${employeeObj.idNumber}</td>
-    <td>${employeeObj.jobTitle}</td>
-    <td>$${employeeObj.annualSalary}</td>
-    <td><button id="deleteButton">Delete</button><td></tr>`);
+    $('#actualTable').append(`<tr class="class">
+    <td class="borderStyle" class="firstItem">${employeeObj.firstName}</td>
+    <td class="borderStyle" class="secondItem">${employeeObj.lastName}</td>
+    <td class="borderStyle">${employeeObj.idNumber}</td>
+    <td class="borderStyle">${employeeObj.jobTitle}</td>
+    <td class="borderStyle">$${employeeObj.annualSalary}</td>
+    <td>qwe qwe<button id="deleteButton">Delete</button><td></tr>`);
     salaryAdder();
 }
 
 function deleteStuff(){
     console.log('hello, this is the delete button');
+    $(this).closest("tr").remove();
 }
 // added a function to not allow submit if any field is empty...
-
