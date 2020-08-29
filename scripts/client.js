@@ -1,6 +1,13 @@
 $(document).ready(onReady);
 let inputInfo = [];
 
+function deleteStuff(){
+    console.log('hello, this is the delete button');
+    $(this).closest("tr").remove();
+    console.log(`totalCosts is ${totalCosts} `);
+    //use .text()
+}
+
 function emptyFields(){
     if(document.getElementById( 'firstName' ).value === ""){
         console.log( 'first name is empty' );
@@ -21,6 +28,7 @@ function emptyFields(){
         submitInfo();
     }
 }
+
 function loadStuff(){
     $('#inputTable').append(`<th><input type="text" class="allInputItems" id="firstName" placeholder="First Name"></th>`);
     $('#inputTable').append(`<th><input type="text" class="allInputItems" id="lastName" placeholder="Last Name"></th>`);
@@ -36,6 +44,7 @@ function loadStuff(){
     <th class="borderStyle">Annual Salary</th>`
     );
 }
+
 function onReady(){
     console.log('JQ is ready.');
     loadStuff();
@@ -56,6 +65,7 @@ function salaryAdder(){
         $('.displayMonthlyCost').attr('id', 'overBudget');
     }
 }
+
 function submitInfo(){
     //console.log('handshake and stuff.');
     let employeeObj = {
@@ -81,11 +91,3 @@ function submitInfo(){
     <td><button id="deleteButton">Delete</button><td></tr>`);
     salaryAdder();
 }
-
-function deleteStuff(){
-    console.log('hello, this is the delete button');
-    $(this).closest("tr").remove();
-    console.log(`totalCosts is ${totalCosts} `);
-    //use .text()
-}
-// added a function to not allow submit if any field is empty...

@@ -13,4 +13,3 @@
 [x] if total costs $20,000 > add red background to the total monthly cost
 [x] create delete button
 [x] delete button removes an employee from DOM ***For Base mode, it does **not** need to remove that Employee's salary from the reported total.***
-[ ] 
