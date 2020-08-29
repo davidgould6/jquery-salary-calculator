@@ -55,6 +55,7 @@ function onReady(){
     console.log('JQ is ready.');
     loadStuff();
     $(document).on('click','#submitButton', emptyFields);
+    $(document).on('click', '#deleteButton', deleteStuff);
 }
 function salaryAdder(){
     let totalCosts = 0;
@@ -91,9 +92,12 @@ function submitInfo(){
     <td>${employeeObj.idNumber}</td>
     <td>${employeeObj.jobTitle}</td>
     <td>$${employeeObj.annualSalary}</td>
-    </tr>`);
+    <td><button id="deleteButton">Delete</button><td></tr>`);
     salaryAdder();
 }
 
+function deleteStuff(){
+    console.log('hello, this is the delete button');
+}
 // added a function to not allow submit if any field is empty...
 
