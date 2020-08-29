@@ -8,9 +8,9 @@
 [x] when button clicked collect all info
 [x] append information to the dom
 [x] clear input fields
-[ ] using stored information --- calculate monthly costs
-[ ] append monthly costs to DOM
-[ ] if total costs $20,000 > add red background to the total monthly cost
+[x] using stored information --- calculate monthly costs
+[x] append monthly costs to DOM
+[x] if total costs $20,000 > add red background to the total monthly cost
 [ ] create delete button
 [ ] delete button removes an employee from DOM ***For Base mode, it does **not** need to remove that Employee's salary from the reported total.***
 [ ] 

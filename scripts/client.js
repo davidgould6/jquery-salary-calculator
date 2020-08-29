@@ -1,10 +1,10 @@
 $(document).ready(onReady);
-let inputInfo = [{
+let inputInfo = [/*{
     firstName: 'David',
     lastName: 'Gould',
     idNumber: 12,
     jobTitle: 'Student',
-    annualSalary: 1
+    annualSalary: 19996
 },
 {
     firstName: 'Yoda',
@@ -12,15 +12,30 @@ let inputInfo = [{
     idNumber: 1,
     jobTitle: 'Master Jedi',
     annualSalary: 3
-}
+}*/
 ];
 
-function onReady(){
-    console.log('JQ is ready.');
-    loadStuff();
-    $(document).on('click','#submitButton', submitInfo);
-}
 
+function emptyFields(){
+    if(document.getElementById( 'firstName' ).value === ""){
+        console.log( 'first name is empty' );
+    }
+    else if(document.getElementById( 'lastName' ).value === ""){
+        console.log( 'last name is empty');
+    }
+    else if( document.getElementById('employeeNumber').value === "" ){
+        console.log('employee number is empty');
+    }
+    else if( document.getElementById('jobTitle').value === "" ){
+        console.log('job title is empty');
+    }
+    else if(document.getElementById('annualSalary').value === "" ){
+        console.log('annual salary is empty')
+    }
+    else{
+        submitInfo();
+    }
+}
 function loadStuff(){
     $('.userInputs').append(`<input type="text" id="firstName" placeholder="First Name">`);
     $('.userInputs').append(`<input type="text" id="lastName" placeholder="Last Name">`);
@@ -35,9 +50,25 @@ function loadStuff(){
     <th>Title</th>
     <th>Annual Salary</th>`
     );
-    $('.displayMonthlyCost').append(`<p>total costs</p>`) // make a note of this one. 
 }
-
+function onReady(){
+    console.log('JQ is ready.');
+    loadStuff();
+    $(document).on('click','#submitButton', emptyFields);
+}
+function salaryAdder(){
+    let totalCosts = 0;
+    for( let i = 0; i < inputInfo.length; i++){
+        let numberOfAnnual = inputInfo[i].annualSalary
+        totalCosts += Number(numberOfAnnual); 
+    }
+    let el = $('.displayMonthlyCost');
+    el.empty();
+    el.text('Monthly costs are: $' + totalCosts );
+    if(totalCosts > 20000){
+        $('.displayMonthlyCost').attr('id', 'overBudget');
+    }
+}
 function submitInfo(){
     //console.log('handshake and stuff.');
     let employeeObj = {
@@ -59,15 +90,10 @@ function submitInfo(){
     <td>${employeeObj.lastName}</td>
     <td>${employeeObj.idNumber}</td>
     <td>${employeeObj.jobTitle}</td>
-    <td>${employeeObj.annualSalary}</td>
+    <td>$${employeeObj.annualSalary}</td>
     </tr>`);
-    displayCost();
+    salaryAdder();
 }
 
-function displayCost(){
-    let totalCosts = 0;
-    for( let i = 0; i < inputInfo.length; i++){
-        let numberOfAnnual = inputInfo[i].annualSalary
-        totalCosts += Number(numberOfAnnual); 
-    }
-}
+// added a function to not allow submit if any field is empty...
+
