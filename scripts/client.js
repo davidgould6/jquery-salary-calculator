@@ -88,7 +88,8 @@ function submitInfo(){
     <td class="borderStyle">${employeeObj.idNumber}</td>
     <td class="borderStyle">${employeeObj.jobTitle}</td>
     <td class="borderStyle">$${employeeObj.annualSalary}</td>
-    <td><button id="deleteButton">Delete</button><td></tr>`);
+    <td><button id="deleteButton">Delete</button><td>
+    </tr>`);
     salaryAdder();
 }
 //if submit button is pressed set delButton to false
