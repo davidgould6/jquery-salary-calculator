@@ -64,6 +64,9 @@ function salaryAdder(){
         let el = $('.displayMonthlyCost');
         el.empty();
         el.text('Monthly costs are: $' + roundToHundredth(totalCosts) );
+        if(totalCosts > 20000){
+            $('.displayMonthlyCost').attr('id', 'overBudget');
+        }
     }
 }
 
