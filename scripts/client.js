@@ -81,15 +81,16 @@ function submitInfo(){
     $('#annualSalary').val('');
 
     $('#actualTable').append(`<tr id="trTest">
-    <td class="borderStyle">${employeeObj.firstName}</td>
-    <td class="borderStyle">${employeeObj.lastName}</td>
-    <td class="borderStyle">${employeeObj.idNumber}</td>
-    <td class="borderStyle">${employeeObj.jobTitle}</td>
+    <td class="borderStyle" id="firstName">${employeeObj.firstName}</td>
+    <td class="borderStyle" id="lastName">${employeeObj.lastName}</td>
+    <td class="borderStyle" id="idNumber">${employeeObj.idNumber}</td>
+    <td class="borderStyle" id="jobTitle">${employeeObj.jobTitle}</td>
     <td class="borderStyle" id="grabAnnualSalary">${employeeObj.annualSalary}</td>
     <td><button id="deleteButton">Delete</button></td>
     </tr>`);
     salaryAdder();
 }
+
 //if submit button is pressed set delButton to false
     //run salary adder conditional if ''delButton === false''
         //run code here...
@@ -140,48 +141,72 @@ function salaryAdder(){
             $('.displayMonthlyCost').attr('id', 'overBudget');
         }
     }
+    console.log(inputInfo);
 }
 
 function deleteStuff(){
-    
     console.log('in delete stuff')
-   
-    
     let startingTempTotal = 0; 
-    let annualSalaryCellGrab = $(this).parent().parent().children('#grabAnnualSalary').text();  // grabs data from table.
-    let numberOfCellAnnualSalary = Number(annualSalaryCellGrab);                                // converts data from table into a number
-    console.log('here is what is in annual salary cell', numberOfCellAnnualSalary);             // console log to make sure it turns into a number
-                                                                       // declaring a counter
-    for( let i = 0; i < inputInfo.length; i++){                                                 // created a for loop to loop through array
-        let annualSalIndex = Number(inputInfo[i].annualSalary);                                 // declaring a variable for index of .annualSalary
-        console.log('this is inputInfo[i].annualSalary', inputInfo[i].annualSalary);
-        console.log('this is startingTempTotal', startingTempTotal);                            // console log to make sure startingTempTotal = 0
-        let firstAdjustedTempTotal = startingTempTotal += annualSalIndex;                       // declared firstAdjustedTempTotal to startingTempTotal adding annualSalIndex to get the total of annualSalary(s) in array
-        console.log('this is tempTotal', firstAdjustedTempTotal);                               // console log to make sure the addition works for total
+     // grabs data from table.
+    let firstNameCellGrab = $(this).parent().parent().children('#firstName').text();
+    let lastNameCellGrab = $(this).parent().parent().children('#lastName').text();
+    let idNumberCellGrab = $(this).parent().parent().children('#idNumber').text();
+    let jobTitleCellGrab = $(this).parent().parent().children('#jobTitle').text();
+    let annualSalaryCellGrab = $(this).parent().parent().children('#grabAnnualSalary').text(); 
 
-        // Grab data of annual salary that is in the table... convert to number then subtract from startingTempTotal...
-        if(annualSalIndex === numberOfCellAnnualSalary){                                        //create conditional that if number that is in selected cell === our index we are looping through
-            console.log('hey the logic works and you are in the conditional.');                 //console log to show we are in conditional
-            console.log('this is firstAdjustedTempTotal from line 157', firstAdjustedTempTotal);//console log to see if firstAdjustedTotal
-            let adjustedTotal = firstAdjustedTempTotal - numberOfCellAnnualSalary;
-            console.log('adjustedTotal is', adjustedTotal);
-            let adjustedMonthlyCosts = adjustedTotal / 12
-            console.log('this is the adjustedMonthlyCosts', adjustedMonthlyCosts );
+    // let numberOfCellAnnualSalary = Number(annualSalaryCellGrab);                                // converts data from table into a number
+    //console.log('here is what is in annual salary cell', numberOfCellAnnualSalary);             // console log to make sure it turns into a number
+    for( let i = 0; i < inputInfo.length; i++){ 
+        while( i < inputInfo.length-1){
+            let firstNameIndex = inputInfo[i].firstName;
+            let lastNameIndex = inputInfo[i].lastName;
+            let idNumberIndex = inputInfo[i].idNumber;
+            let jobTitleIndex = inputInfo[i].jobTitle;
+            let annualSalIndex = inputInfo[i].annualSalary; // declaring a variable for index of .annualSalary
+            /*console.log('this is firstNameIndex',firstNameIndex);
+            console.log('this is lastNameIndex',lastNameIndex);
+            console.log('this is idNumberIndex',idNumberIndex);
+            console.log('this is jobTitleIndex',jobTitleIndex);
+            console.log('this is annualSalIndex',annualSalIndex);
+            console.log('this is inputInfo[i].annualSalary', inputInfo[i].annualSalary);
+            console.log('this is startingTempTotal', startingTempTotal);*/                            // console log to make sure startingTempTotal = 0
+                                   // declared firstAdjustedTempTotal to startingTempTotal adding annualSalIndex to get the total of annualSalary(s) in array
+            //console.log('this is tempTotal', firstAdjustedTempTotal);                               // console log to make sure the addition works for total
             
-            //subtraction logic works... now...   [x] divide adjusted total by 12
-                                                //[x]delete row
-                                                //[x]delete that object from array
-                                                console.log('logging out inputInfo at i',inputInfo[i]);
-                                                inputInfo.splice(i,1);
-                                                
-                                                //append/text new total to '.displayMonthlyCost'
-                                                let el = $('.displayMonthlyCost');
-                                                el.empty();
-                                                el.text('Monthly costs are: $' + roundToHundredth(adjustedMonthlyCosts));
-                                                
-        }
+            let otherAnnualSalUpdate = Number(annualSalIndex);
+            console.log('otherAnnualSalUpdate',otherAnnualSalUpdate);
+            let whatWeMinusFrom = startingTempTotal += otherAnnualSalUpdate;
+            console.log('whatWeMinusFrom',whatWeMinusFrom);
+            // Grab data of annual salary that is in the table... convert to number then subtract from startingTempTotal...
+            if(
+                firstNameIndex === firstNameCellGrab &&
+                lastNameIndex === lastNameCellGrab &&
+                idNumberIndex === idNumberCellGrab &&
+                jobTitleIndex === jobTitleCellGrab &&
+                annualSalIndex === annualSalaryCellGrab
+                ){
+                console.log('WE MADE IT!!!!!');
+                let annualSalUpdate = Number(annualSalIndex); // turn annual salary into number
+                console.log('this is annualSalUpdate', annualSalUpdate);
+                let firstAdjustedTempTotal = whatWeMinusFrom - annualSalUpdate; 
+                console.log('this is firstAdjustedTempTotal',firstAdjustedTempTotal )
+                //let adjustedTotal = firstAdjustedTempTotal - annualSalUpdate;
+                //console.log('this is ',adjustedTotal);
+                let adjustedMonthlyCosts = firstAdjustedTempTotal / 12;
+                console.log('this is adjustedMonthlyCosts', adjustedMonthlyCosts);
+                //removes object from array on click of delete.
+                inputInfo.splice(i,1);
+                //append/text new total to '.displayMonthlyCost'
+                let el = $('.displayMonthlyCost');
+                el.empty();
+                el.text('Monthly costs are: $' + roundToHundredth(adjustedMonthlyCosts));
+            }
+        }                                                // created a for loop to loop through array
+        
     }
-    //$(this).parent().parent().remove();
+    $(this).parent().parent().remove();
+    console.log(inputInfo);
 }
     // ^^^^ with this running into a problem if I have duplicate annual salaries because of the conditional (annualSalIndex === numberOfCellAnnualSalary)
+//saving for later let annualSalIndex = Number(inputInfo[i].annualSalary);
 
