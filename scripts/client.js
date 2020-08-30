@@ -1,15 +1,29 @@
 $(document).ready(onReady);
-let inputInfo = [];
+let inputInfo = [/*{
+    firstName: 'Michael',
+    lastName: 'Scott',
+    idNumber: 123,
+    jobTitle: 'Branch Manager',
+    annualSalary: 1200
+}
+,{
+    firstName: 'Master',
+    lastName: 'Yoda',
+    idNumber: 345,
+    jobTitle: 'Master Jedi',
+    annualSalary: 1200
+}*/];
 //let delButton = false;
 // found rounding number to closest hundredth from https://stackoverflow.com/questions/14968615/rounding-to-the-nearest-hundredth-of-a-decimal-in-javascript
 const roundToHundredth = (value) => {
     return Number(value.toFixed(2));
 }
 
-function deleteStuff(){
-    console.log('in delete stuff')
-    $(this).closest("tr").remove();
+function tempDeleteFromArray(){
+
 }
+
+
 
 function emptyFields(){
     if(document.getElementById( 'firstName' ).value === ""){
@@ -57,9 +71,9 @@ function onReady(){
 function salaryAdder(){
     let totalCosts = 0;
     for(let i = 0; i < inputInfo.length; i++){
-        let numberOfAnnual = inputInfo[i].annualSalary
-        let monthlyPay = Number(numberOfAnnual)
-        let dividedByTwelve = monthlyPay/12
+        let numberOfAnnual = inputInfo[i].annualSalary;
+        let monthlyPay = Number(numberOfAnnual);
+        let dividedByTwelve = monthlyPay/12;
         totalCosts += dividedByTwelve; 
         let el = $('.displayMonthlyCost');
         el.empty();
@@ -85,13 +99,13 @@ function submitInfo(){
     $('#jobTitle').val('');
     $('#annualSalary').val('');
 
-    $('#actualTable').append(`<tr>
+    $('#actualTable').append(`<tr id="trTest">
     <td class="borderStyle">${employeeObj.firstName}</td>
     <td class="borderStyle">${employeeObj.lastName}</td>
     <td class="borderStyle">${employeeObj.idNumber}</td>
     <td class="borderStyle">${employeeObj.jobTitle}</td>
-    <td class="borderStyle">$${employeeObj.annualSalary}</td>
-    <td><button id="deleteButton">Delete</button><td>
+    <td class="borderStyle" id="grabAnnualSalary">${employeeObj.annualSalary}</td>
+    <td><button id="deleteButton">Delete</button></td>
     </tr>`);
     salaryAdder();
 }
@@ -118,4 +132,35 @@ the global...
 function delButtonFalse(){
     let delButton = false;
     console.log('delButtonFalse', delButton);
-}*/
+}
+
+New logic path / idea for stretch goal...
+Reloop through the array...
+    [x]-->declare variable = that is the total of all annual prices from the array...
+        [x]--> create a conditional 
+            --> if( inputInfo[i].annualSalary === $(this).parent().parent())
+                --> declare another variable = subtract inputInfo[i].annualSalary from total/ variable we declared earlier
+                    --> Now we have the updatedTotal ... Delete Object from array
+                        -->Grab updatedTotal divide by 12 ... .text() it to the monthly costs.
+                        [] make sure red style works. :)
+*/
+
+function deleteStuff(){
+    console.log('in delete stuff')
+    let startingTempTotal = 0;
+    let thisTest = $(this).parent().parent().children('#grabAnnualSalary').text();
+    //newestTest = thisTest.children('#grabAnnualSalary').text();
+    console.log('here is our test', Number(thisTest));
+
+    for( let i = 0; i < inputInfo.length; i++){
+        let tempTotal = startingTempTotal += Number(inputInfo[i].annualSalary);
+        console.log('this is tempTotal', tempTotal);
+        // Grab data of annual salary that is in the table... convert to number then subtract from startingTempTotal...
+        if(tempTotal === Number(thisTest)){
+            console.log('hey the logic works and you are in the conditional.')
+        }
+    }
+    //$(this).closest("tr").remove();
+}
+    
+
