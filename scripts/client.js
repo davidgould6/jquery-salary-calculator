@@ -1,19 +1,6 @@
 $(document).ready(onReady);
 
-let inputInfo = [/*{
-    firstName: 'Michael',
-    lastName: 'Scott',
-    idNumber: 123,
-    jobTitle: 'Branch Manager',
-    annualSalary: 1200
-}
-,{
-    firstName: 'Master',
-    lastName: 'Yoda',
-    idNumber: 345,
-    jobTitle: 'Master Jedi',
-    annualSalary: 1200
-}*/];
+let inputInfo = [];
 
 //let delButton = false;
 // found rounding number to closest hundredth from https://stackoverflow.com/questions/14968615/rounding-to-the-nearest-hundredth-of-a-decimal-in-javascript
@@ -64,6 +51,22 @@ function onReady(){
     $(document).on('click','#deleteButton', deleteStuff);
 }
 
+function salaryAdder(){
+    let totalCosts = 0;
+    for(let i = 0; i < inputInfo.length; i++){
+        let numberOfAnnual = inputInfo[i].annualSalary;
+        let monthlyPay = Number(numberOfAnnual);
+        let dividedByTwelve = monthlyPay/12;
+        totalCosts += dividedByTwelve; 
+        let el = $('.displayMonthlyCost');
+        el.empty();
+        el.text('Monthly costs are: $' + roundToHundredth(totalCosts) );
+        if(totalCosts > 20000){
+            $('.displayMonthlyCost').attr('id', 'overBudget');
+        }
+    }
+    console.log(inputInfo);
+}
 
 function submitInfo(){
     let employeeObj = {
@@ -127,22 +130,7 @@ Reloop through the array...
                         [] make sure red style works. :)
 */
 
-function salaryAdder(){
-    let totalCosts = 0;
-    for(let i = 0; i < inputInfo.length; i++){
-        let numberOfAnnual = inputInfo[i].annualSalary;
-        let monthlyPay = Number(numberOfAnnual);
-        let dividedByTwelve = monthlyPay/12;
-        totalCosts += dividedByTwelve; 
-        let el = $('.displayMonthlyCost');
-        el.empty();
-        el.text('Monthly costs are: $' + roundToHundredth(totalCosts) );
-        if(totalCosts > 20000){
-            $('.displayMonthlyCost').attr('id', 'overBudget');
-        }
-    }
-    console.log(inputInfo);
-}
+
 
 function deleteStuff(){
     console.log('in delete stuff')
@@ -157,20 +145,13 @@ function deleteStuff(){
     // let numberOfCellAnnualSalary = Number(annualSalaryCellGrab);                                // converts data from table into a number
     //console.log('here is what is in annual salary cell', numberOfCellAnnualSalary);             // console log to make sure it turns into a number
     for( let i = 0; i < inputInfo.length; i++){ 
-        while( i < inputInfo.length-1){
             let firstNameIndex = inputInfo[i].firstName;
             let lastNameIndex = inputInfo[i].lastName;
             let idNumberIndex = inputInfo[i].idNumber;
             let jobTitleIndex = inputInfo[i].jobTitle;
             let annualSalIndex = inputInfo[i].annualSalary; // declaring a variable for index of .annualSalary
-            /*console.log('this is firstNameIndex',firstNameIndex);
-            console.log('this is lastNameIndex',lastNameIndex);
-            console.log('this is idNumberIndex',idNumberIndex);
-            console.log('this is jobTitleIndex',jobTitleIndex);
-            console.log('this is annualSalIndex',annualSalIndex);
-            console.log('this is inputInfo[i].annualSalary', inputInfo[i].annualSalary);
-            console.log('this is startingTempTotal', startingTempTotal);*/                            // console log to make sure startingTempTotal = 0
-                                   // declared firstAdjustedTempTotal to startingTempTotal adding annualSalIndex to get the total of annualSalary(s) in array
+                                                            // console log to make sure startingTempTotal = 0
+                                                             // declared firstAdjustedTempTotal to startingTempTotal adding annualSalIndex to get the total of annualSalary(s) in array
             //console.log('this is tempTotal', firstAdjustedTempTotal);                               // console log to make sure the addition works for total
             
             let otherAnnualSalUpdate = Number(annualSalIndex);
@@ -188,6 +169,7 @@ function deleteStuff(){
                 console.log('WE MADE IT!!!!!');
                 let annualSalUpdate = Number(annualSalIndex); // turn annual salary into number
                 console.log('this is annualSalUpdate', annualSalUpdate);
+                //                              your grand total
                 let firstAdjustedTempTotal = whatWeMinusFrom - annualSalUpdate; 
                 console.log('this is firstAdjustedTempTotal',firstAdjustedTempTotal )
                 //let adjustedTotal = firstAdjustedTempTotal - annualSalUpdate;
@@ -200,13 +182,12 @@ function deleteStuff(){
                 let el = $('.displayMonthlyCost');
                 el.empty();
                 el.text('Monthly costs are: $' + roundToHundredth(adjustedMonthlyCosts));
-            }
-        }                                                // created a for loop to loop through array
-        
+            }   
     }
     $(this).parent().parent().remove();
     console.log(inputInfo);
 }
-    // ^^^^ with this running into a problem if I have duplicate annual salaries because of the conditional (annualSalIndex === numberOfCellAnnualSalary)
-//saving for later let annualSalIndex = Number(inputInfo[i].annualSalary);
+    // I have a bug using this for loop because if the conditions are met it stops looping...
+    //been working on this for a long time and need a break will come back to it
+
 
